@@ -6,22 +6,22 @@ const { Category, Product } = require('../../models');
 router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
-  const userData = Category.findAll().catch((err) => {
+  const categoryData = Category.findAll().catch((err) => {
     res.json(err);
   });
-  res.json(userData);
+  res.json(categoryData);
 });
 
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    const userData = Category.findByPk(req.params.id);
-    if (!userData) {
+    const categoryData = Category.findByPk(req.params.id);
+    if (!categoryData) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
     }
-    res.status(200).json(userData);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -30,9 +30,9 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new category
   try {
-    const userData = Category.create(req.body);
+    const categoryData = Category.create(req.body);
     // 200 status code means the request is successful
-    res.status(200).json(userData);
+    res.status(200).json(categoryData);
   } catch (err) {
     // 400 status code means the server could not understand the request
     res.status(400).json(err);
@@ -42,17 +42,17 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
   try {
-    const userData = Category.update(req.body, {
+    const categoryData = Category.update(req.body, {
       where: {
         id: req.params.id,
       },
       individualHooks: true
     });
-    if (!userData[0]) {
+    if (!categoryData[0]) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
     }
-    res.status(200).json(userData);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -60,12 +60,12 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
-  const userData = Category.destroy({
+  const categoryData = Category.destroy({
     where: {
       id: req.params.id,
     },
   }).catch((err) => res.json(err));
-  res.json(userData);
+  res.json(categoryData);
 });
 
 module.exports = router;
