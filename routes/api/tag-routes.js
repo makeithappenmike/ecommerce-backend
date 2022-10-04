@@ -3,20 +3,24 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
-router.get('/', (req, res) => {
+// get all tags
+router.get('/', async (req, res) => {
   // find all tags
-  // be sure to include its associated Product data
-  const tagData = Tag.findAll().catch((err) => {
+  // be sure to include its associated Product and Category data
+  const tagData = await Tag.findAll({
+    include: [{ model: Product }],
+  }).catch((err) => {
     res.json(err);
   });
   res.json(tagData);
 });
 
-router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+// get one product
+router.get('/:id', async (req, res) => {
+  // find a single product by its `id`
+  // be sure to include its associated Category and Tag data
   try {
-    const tagData = Tag.findByPk(req.params.id);
+    const tagData = await Tag.findByPk(req.params.id);
     if (!tagData) {
       res.status(404).json({ message: 'No tag with this id!' });
       return;
@@ -27,10 +31,10 @@ router.get('/:id', (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
   try {
-    const tagData = Tag.create(req.body);
+    const tagData = await Tag.create(req.body);
     // 200 status code means the request is successful
     res.status(200).json(tagData);
   } catch (err) {
