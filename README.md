@@ -21,6 +21,14 @@ Clone the repo > run ```npm install``` to intialize the included dependencies
 
 You will also need to make sure that MySql is installed.
 
+You will also need a .env file with the following:<br>
+
+DB_NAME='ecommerce_db'
+<br>
+DB_USER='root'
+<br>
+DB_PW='root'
+
 ## Usage
 Source and Seed the database by running ```mysql -u root -p``` to log into the database. Run ```source schema.sql``` followed by ```quit``` to cd back into the root folder. Then run ```node seeds/index.js``` to seed the db and ```npm start``` to begin using the application.
 
