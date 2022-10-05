@@ -27,13 +27,17 @@ Source and Seed the database by running ```mysql -u root -p``` to log into the d
 Postman or Insomnia can be used to make requests to the following:
 
 http://localhost:3001/api/products/
+<br>
 http://localhost:3001/api/categories/
+<br>
 http://localhost:3001/api/tags/
 
 or individual items
 
 http://localhost:3001/api/products/{id}
+<br>
 http://localhost:3001/api/categories/{id}
+<br>
 http://localhost:3001/api/tags/{id}
 
 ## License
